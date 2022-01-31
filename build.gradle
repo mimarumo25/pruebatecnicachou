@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+buildscript {
+    repositories {
+
+        mavenCentral()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.89")
+    }
+}
+ext{
+    serenityVersion = '2.0.90'
+    serenityCucumberVersion = '1.9.49'
+}
+
+dependencies {
+    testImplementation 'net.serenity-bdd:serenity-core:2.0.73'
+    testImplementation 'net.serenity-bdd:serenity-junit:2.0.73'
+
+    testImplementation('junit:junit:4.12')
+    testImplementation('org.assertj:assertj-core:3.13.2')
+    testImplementation('org.slf4j:slf4j-simple:1.7.28')
+    implementation 'net.serenity-bdd:serenity-core:2.0.73'
+    implementation 'net.serenity-bdd:serenity-junit:2.0.73'
+    implementation 'net.serenity-bdd:serenity-cucumber:1.9.45'
+    implementation('net.serenity-bdd:serenity-screenplay:2.0.73')
+    implementation('net.serenity-bdd:serenity-screenplay-webdriver:2.0.73')
+    compile group: 'org.apache.poi', name: 'poi', version: '4.1.2'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.1.2'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.6.1'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6.1'
+
+}
+gradle.startParameter.continueOnFailure = true

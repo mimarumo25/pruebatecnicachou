@@ -1,0 +1,13 @@
+# Author: Miguel Rubide
+# language:es
+  @historia
+
+Característica: Utest.com
+   Como usuario quiero ingresar a Utest.com, dar clic en la opción de registro (JOIN TODAY)
+   y realizar el diligenciamiento del formulario con la finalidad de crear un nuevo usuario.
+
+  @Escenario1
+  Escenario:  Crear un Nuevo Usuario
+    Dado que miguel quiere registrarse con un nuevo usuario en Utest.com
+    Cuando  el debe dar click en el boton Join y luego ingresa la informacion solicitada (datos personales) en el formulario y dar click en el boton
+    Entonces el deberia de recibir un mensaje de usuario registrado y tener acceso a la cuenta y las funcionalidades de la app
