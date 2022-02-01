@@ -13,28 +13,51 @@ import ui.UtestHomePage;
 
 
 public class Registrarse implements Task {
+    private String nombres;
+    private String apellidos;
+    private String email;
+    private String fmes;
+    private String fdia;
+    private String fano;
+    private String ciudad;
+    private String codpostal;
+    private String contrasena;
+    private String confirmarcontrasena;
 
-    public static Registrarse usuario() {
-        return Tasks.instrumented(Registrarse.class);
+    public Registrarse(String nombres, String apellidos, String email, String fmes, String fdia, String fano, String ciudad, String codpostal, String contrasena, String confirmarcontrasena) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.fmes = fmes;
+        this.fdia = fdia;
+        this.fano = fano;
+        this.ciudad = ciudad;
+        this.codpostal = codpostal;
+        this.contrasena = contrasena;
+        this.confirmarcontrasena = confirmarcontrasena;
+    }
+
+    public static Registrarse usuario(String nombres, String apellidos, String email, String fmes, String fdia, String fano, String ciudad, String codpostal, String contrasena, String confirmarcontrasena) {
+        return Tasks.instrumented(Registrarse.class,nombres,apellidos,email,fmes,fdia,fano,ciudad,codpostal,contrasena,confirmarcontrasena);
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
     actor.attemptsTo(Click.on(UtestHomePage.BOTON_JOIN_TODAY));
-    actor.attemptsTo(Enter.theValue("Miguel Mariano").into(UtestHomePage.NOMBRES));
-    actor.attemptsTo(Enter.theValue("Rubide Mosquera").into(UtestHomePage.APELLIDOS));
-    actor.attemptsTo(Enter.theValue("mimarumo25@gmail.com").into(UtestHomePage.CORREO));
+    actor.attemptsTo(Enter.theValue(nombres).into(UtestHomePage.NOMBRES));
+    actor.attemptsTo(Enter.theValue(apellidos).into(UtestHomePage.APELLIDOS));
+    actor.attemptsTo(Enter.theValue(email).into(UtestHomePage.CORREO));
         actor.attemptsTo(
-                SelectFromOptions.byVisibleText("January").from(UtestHomePage.FECHA_NACIMIENTO_MES)
+                SelectFromOptions.byVisibleText(fmes).from(UtestHomePage.FECHA_NACIMIENTO_MES)
         );
         actor.attemptsTo(
-                SelectFromOptions.byVisibleText("30").from(UtestHomePage.FECHA_NACIMIENTO_DIA)
+                SelectFromOptions.byVisibleText(fdia).from(UtestHomePage.FECHA_NACIMIENTO_DIA)
         );
         actor.attemptsTo(
-                SelectFromOptions.byVisibleText("1986").from(UtestHomePage.FECHA_NACIMIENTO_ANO)
+                SelectFromOptions.byVisibleText(fano).from(UtestHomePage.FECHA_NACIMIENTO_ANO)
         );
         actor.attemptsTo(Click.on(UtestHomePage.BOTON_NEXT_LOCATION));
-        actor.attemptsTo(Enter.theValue("med").into(UtestHomePage.CIUDAD));
+        actor.attemptsTo(Enter.theValue(ciudad).into(UtestHomePage.CIUDAD));
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -43,18 +66,16 @@ public class Registrarse implements Task {
       actor.attemptsTo(Hit.the(Keys.ARROW_DOWN).into(UtestHomePage.CIUDAD),
               Hit.the(Keys.ENTER).into(UtestHomePage.CIUDAD));
 
-        actor.attemptsTo(Enter.theValue("270001").into(UtestHomePage.CODIGO_POSTAL));
-       /* actor.attemptsTo(Hit.the(Keys.ENTER).into(UtestHomePage.PAIS),
-                Enter.theValue("Colombia").into(UtestHomePage.PAIS),
-                Hit.the(Keys.ENTER).into(UtestHomePage.PAIS));*/
+        actor.attemptsTo(Enter.theValue(codpostal).into(UtestHomePage.CODIGO_POSTAL));
 
         actor.attemptsTo(Click.on(UtestHomePage.BOTON_NEXT_DEVICES));
 
         actor.attemptsTo(Click.on(UtestHomePage.BOTON_NEXT_LAST_STEP));
-        actor.attemptsTo(Enter.theValue("MACACOm123").into(UtestHomePage.PASSWORD));
-        actor.attemptsTo(Enter.theValue("MACACOm123").into(UtestHomePage.CONFIRMPASSWORD));
+        actor.attemptsTo(Enter.theValue(contrasena).into(UtestHomePage.PASSWORD));
+        actor.attemptsTo(Enter.theValue(confirmarcontrasena).into(UtestHomePage.CONFIRMPASSWORD));
         actor.attemptsTo(Click.on(UtestHomePage.CONFIRMAR_TERMINOS));
         actor.attemptsTo(Click.on(UtestHomePage.CONFIRMAR_PRIVACIDAD));
         actor.attemptsTo(Click.on(UtestHomePage.BOTON_COMPLETE_SETUP));
+
     }
 }
